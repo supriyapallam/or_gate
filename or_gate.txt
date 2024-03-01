@@ -1,0 +1,36 @@
+//Design Code
+module or_gate(input a,b, output out);
+  assign out= (a | b);
+endmodule
+
+//Test Bench Code
+module tb();
+  //Input and output to dut
+  reg a,b;
+  wire out;
+  //Instantiation
+  or_gate DUT(a,b,out);
+  //assining values to a and b
+  integer i;
+  initial
+    begin
+      for(i=0;i<4;i=i+1)
+        begin
+          {a,b}=i;
+          #10;
+        end
+    end
+  
+  //waveform change in dump
+  initial
+    begin
+      $dumpfile("test.vcd");
+      $dumpvars(1);
+    end
+  //print
+  initial
+    begin
+      $monitor("a=%b,b=%b,out=%b",a,b,out);
+    end
+endmodule
+ 
